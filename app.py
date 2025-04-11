@@ -125,4 +125,5 @@ def create_user():
         return redirect(url_for('admin_panel'))
     
     return render_template('create_user.html')
-        except sqlite3.IntegrityError:  # Correto
+        
+except sqlite3.IntegrityError:  # Correto

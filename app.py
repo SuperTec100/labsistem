@@ -126,4 +126,6 @@ def create_user():
     
     return render_template('create_user.html')
         
-except sqlite3.IntegrityError:  # Correto
+except sqlite3.IntegrityError as e:
+    flash('Nome de usuário já existe')
+    print(f"Erro de integridade: {e}") 

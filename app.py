@@ -117,4 +117,12 @@ def create_user():
             ''', (username, hashed_pw, is_admin, expiration_date))
             conn.commit()
             flash('Usuário criado com sucesso!')
+        except sqlite3.IntegrityError:
+            flash('Nome de usuário já existe')
+        finally:
+            conn.close()
+        
+        return redirect(url_for('admin_panel'))
+    
+    return render_template('create_user.html')
         except sqlite3.IntegrityError:  # Correto

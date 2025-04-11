@@ -129,3 +129,5 @@ def create_user():
 except sqlite3.IntegrityError as e:
     flash('Nome de usuário já existe')
     print(f"Erro de integridade: {e}") 
+if __name__ == '__main__':
+    app.run(debug=True)

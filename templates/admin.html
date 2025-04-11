@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Painel Administrativo</h1>
+    <p>Bem-vindo, {{ session.username }}!</p>
+    
+    <a href="{{ url_for('create_user') }}" class="btn">Criar Novo Usuário</a>
+    <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
+    
+    <h2>Usuários</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuário</th>
+                <th>Admin</th>
+                <th>Expira em</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ "Sim" if user.is_admin else "Não" }}</td>
+                    <td>{{ user.expiration_date }}</td>
+                    <td>
+                        {% if user.username != session.username %}
+                            <a href="{{ url_for('delete_user', user_id=user.id) }}" class="btn btn-danger">Excluir</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

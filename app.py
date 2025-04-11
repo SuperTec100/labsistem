@@ -117,4 +117,4 @@ def create_user():
             ''', (username, hashed_pw, is_admin, expiration_date))
             conn.commit()
             flash('Usuário criado com sucesso!')
-        except sqlite3.Integrity
+        except sqlite3.IntegrityError:  # Correto
